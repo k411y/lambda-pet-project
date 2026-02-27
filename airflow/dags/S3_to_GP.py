@@ -91,7 +91,7 @@ def run_transfer_to_ch(config):
         SELECT * FROM postgresql(
             '{config['GP_HOST']}:{config['GP_PORT']}', 
             '{config['GP_DB']}', 
-            '{config['GP_TABLE_MART']}',  -- Обрати внимание, тут, видимо, нужна витрина?
+            '{config['GP_TABLE_MART']}',
             '{config['GP_USER']}', 
             '{config['GP_PASSWORD']}',
             '{config['GP_SCHEMA']}'
