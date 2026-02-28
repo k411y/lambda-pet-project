@@ -6,7 +6,6 @@ from pyspark.sql.functions import col, from_unixtime
 
 load_dotenv()
 
-# Забираем переменные окружения
 gp_host = os.getenv("GP_HOST")
 gp_port = os.getenv("GP_PORT")
 gp_db = os.getenv("GP_DB")
@@ -30,10 +29,9 @@ print("📥 Читаем исторические данные из S3 (MinIO)..
 
 # 2. Чтение файлов
 try:
-    # Используем переменную пути
     df = spark.read.parquet(f"{s3_bucket_path}/*.parquet")
 except Exception as e:
-    print("🤷‍♂️ Нет новых файлов для загрузки.")
+    print("Нет новых файлов для загрузки.")
     sys.exit(0)
 
 # 3. Трансформация данных (BIGINT -> TIMESTAMP)
@@ -66,7 +64,6 @@ Path = sc._gateway.jvm.org.apache.hadoop.fs.Path
 FileSystem = sc._gateway.jvm.org.apache.hadoop.fs.FileSystem
 hadoop_conf = sc._jsc.hadoopConfiguration()
 
-# Используем переменную для корня бакета
 fs = FileSystem.get(URI(s3_root_uri), hadoop_conf)
 
 source_dir = Path(s3_bucket_path)
